@@ -1,0 +1,1368 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Building Department - Module 1</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f4f4f4;
+            color: #222;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: #800000;
+            color: white;
+            text-align: center;
+            padding: 25px 15px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        header h2 {
+            margin: 8px 0 0;
+            color: white;
+            border: none;
+            padding: 0;
+        }
+
+        /* ================= HAMBURGER NAVIGATION ================= */
+
+        .navbar {
+            background: #4d0000;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+        }
+
+        .nav-title {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .hamburger {
+            width: 45px;
+            height: 42px;
+            border: none;
+            border-radius: 5px;
+            background: #800000;
+            cursor: pointer;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 26px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: 0.3s;
+        }
+
+        .hamburger:hover {
+            background: #a00000;
+        }
+
+        /* ================= MENU ================= */
+
+        .nav-menu {
+            position: absolute;
+            right: 20px;
+            top: 65px;
+
+            width: 260px;
+
+            background: #4d0000;
+
+            display: none;
+            flex-direction: column;
+
+            border-radius: 0 0 8px 8px;
+
+            box-shadow: 0 5px 15px rgba(0,0,0,0.35);
+
+            overflow: hidden;
+        }
+
+        .nav-menu.show {
+            display: flex;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+
+            border-bottom: 1px solid #6d1a1a;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .nav-menu a:hover {
+            background: #800000;
+            padding-left: 28px;
+        }
+
+        .nav-menu a.active {
+            background: #800000;
+        }
+
+        /* ================= QUICK BUTTONS ================= */
+
+        .quick-buttons {
+            background: #660000;
+
+            padding: 15px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+        }
+
+        .quick-buttons a {
+            text-decoration: none;
+            color: white;
+
+            background: #800000;
+
+            padding: 11px 18px;
+
+            border-radius: 5px;
+
+            font-weight: bold;
+
+            border: 1px solid #aa4444;
+
+            transition: 0.3s;
+        }
+
+        .quick-buttons a:hover {
+            background: #a00000;
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            width: 95%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #800000;
+
+            border-left: 6px solid #800000;
+
+            padding-left: 10px;
+
+            margin-top: 30px;
+        }
+
+        /* ================= INFORMATION CARD ================= */
+
+        .info-card {
+            background: white;
+
+            padding: 20px;
+
+            margin: 20px 0;
+
+            border-radius: 8px;
+
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        }
+
+        .info-card h3 {
+            color: #800000;
+
+            margin-top: 0;
+        }
+
+        /* ================= TABLE ================= */
+
+        .table-container {
+            width: 100%;
+
+            overflow-x: auto;
+
+            background: white;
+
+            border-radius: 8px;
+
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+
+            min-width: 1250px;
+
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+
+            padding: 10px;
+
+            text-align: center;
+        }
+
+        th {
+            background: #800000;
+
+            color: white;
+
+            font-size: 14px;
+        }
+
+        tr:nth-child(even) td {
+            background: #fafafa;
+        }
+
+        .student {
+            background: #f1dada !important;
+
+            font-weight: bold;
+
+            color: #4d0000;
+        }
+
+        .unit {
+            background: #f7e6e6 !important;
+
+            text-align: left;
+
+            font-weight: bold;
+
+            color: #4d0000;
+        }
+
+        /* ================= VIEW BUTTON ================= */
+
+        .view-btn {
+            display: inline-block;
+
+            background: #800000;
+
+            color: white;
+
+            text-decoration: none;
+
+            padding: 6px 10px;
+
+            border-radius: 4px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+        }
+
+        .view-btn:hover {
+            background: #a00000;
+        }
+
+        /* ================= PORTFOLIO ================= */
+
+        .card {
+            background: white;
+
+            padding: 20px;
+
+            margin: 20px 0;
+
+            border-radius: 8px;
+
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        }
+
+        .card h3 {
+            color: #800000;
+
+            border-bottom: 2px solid #eee;
+
+            padding-bottom: 8px;
+        }
+
+        .card h4 {
+            color: #660000;
+
+            margin-top: 25px;
+        }
+
+        .assessment {
+            background: #f9eeee;
+
+            border-left: 5px solid #800000;
+
+            padding: 12px;
+
+            margin: 8px 0;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #4d0000;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px;
+
+            margin-top: 30px;
+        }
+
+        footer p {
+            margin: 5px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 700px) {
+
+            header h1 {
+                font-size: 22px;
+            }
+
+            header h2 {
+                font-size: 18px;
+            }
+
+            .navbar {
+                padding: 0 15px;
+            }
+
+            .nav-title {
+                font-size: 14px;
+            }
+
+            .nav-menu {
+                right: 10px;
+
+                width: 240px;
+            }
+
+            .container {
+                width: 100%;
+
+                padding: 10px;
+            }
+
+            .quick-buttons a {
+                width: 100%;
+
+                text-align: center;
+            }
+
+            .assessment {
+                display: block;
+            }
+
+            .assessment .view-btn {
+                margin-top: 8px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header>
+
+    <h1>ABERDARE TECHNICAL COLLEGE</h1>
+
+    <h2>BUILDING DEPARTMENT</h2>
+
+    <p>MODULE 1 - MASONRY TRAINING AND ASSESSMENT</p>
+
+</header>
+
+
+<!-- =====================================================
+     HAMBURGER NAVIGATION
+===================================================== -->
+
+<nav class="navbar">
+
+    <div class="nav-title">
+        BUILDING DEPARTMENT
+    </div>
+
+    <button class="hamburger" onclick="toggleMenu()">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
+
+
+    <div class="nav-menu" id="navMenu">
+
+        <a href="index.html">Home</a>
+       <a href="contacts.html">contacts</a>
+
+        <a href="building.html" class="active">
+            Module 1
+        </a>
+
+        <a href="module2building.html">
+            Module 2
+        </a>
+
+        <a href="module3building.html">
+            Module 3
+        </a>
+
+        <a href="module4building.html">
+            Module 4
+        </a>
+
+        <a href="module5building.html">
+            Module 5
+        </a>
+
+        <a href="module6building.html">
+            Module 6
+        </a>
+
+        <a href="reports.html">
+            Student Reports
+        </a>
+
+        <a href="contact.html">
+            Contacts
+        </a>
+<a href="about.html">about us</a>
+<a href="studentsreport.html">Students report</a>
+
+
+    </div>
+
+</nav>
+
+
+<!-- =====================================================
+     QUICK ACCESS BUTTONS
+===================================================== -->
+
+<div class="quick-buttons">
+
+    <a href="timetable.pdf">
+        Timetable
+    </a>
+
+    <a href="cu.pdf">
+        Curriculum
+    </a>
+
+    <a href="attendance.pdf">
+        Attendance
+    </a>
+
+    <a href="os.pdf">
+        Occupational Standards
+    </a>
+
+    <a href="reports.html">
+        Student Reports
+    </a>
+ <a href=".pdf">
+   masonary work LP
+    </a>
+ <a href="">
+        masonary work finishes LP
+    </a>
+ <a href="timetable.pdf">
+        Masonaryb products LP
+    </a>
+ <a href="">
+        Building site preliminary works 1 LP
+    </a>
+ <a href="timetable.pdf">
+        Building temporary works LP
+    </a>
+
+</div>
+
+
+<div class="container">
+
+
+<!-- =====================================================
+     MODULE INFORMATION
+===================================================== -->
+
+<div class="info-card">
+
+    <h3>Module 1 - Building Department</h3>
+
+    <p>
+        This section contains the practical assessment records,
+        student portfolios and continuous practical observation
+        checklists for Module 1 of the Building Department.
+    </p>
+
+    <p>
+        <strong>Units covered:</strong>
+    </p>
+
+    <ul>
+
+        <li>Perform Masonry Work</li>
+
+        <li>Perform Masonry Work Finishes</li>
+
+        <li>Produce Masonry Products</li>
+
+    </ul>
+
+</div>
+
+
+<!-- =====================================================
+     PRACTICAL ASSESSMENT TABLE
+===================================================== -->
+
+<h2>Practical Assessment Scores</h2>
+
+
+<div class="table-container">
+
+<table>
+
+<thead>
+
+<tr>
+
+    <th rowspan="2">
+        Student
+    </th>
+
+    <th rowspan="2">
+        Unit
+    </th>
+
+    <th colspan="2">
+        Practical 1
+    </th>
+
+    <th rowspan="2">
+        Exam
+    </th>
+
+    <th colspan="2">
+        Practical 2
+    </th>
+
+    <th rowspan="2">
+        Exam
+    </th>
+
+    <th colspan="2">
+        Practical 3
+    </th>
+
+    <th rowspan="2">
+        Exam
+    </th>
+
+    <th rowspan="2">
+        FA Practical<br>Average
+    </th>
+
+    <th rowspan="2">
+        FA Oral<br>Average
+    </th>
+
+</tr>
+
+
+<tr>
+
+    <th>
+        Prac
+    </th>
+
+    <th>
+        Oral
+    </th>
+
+    <th>
+        Prac
+    </th>
+
+    <th>
+        Oral
+    </th>
+
+    <th>
+        Prac
+    </th>
+
+    <th>
+        Oral
+    </th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+
+<!-- STUDENT 1 -->
+
+<tr>
+
+<td rowspan="3" class="student">
+    STUDENT 1
+</td>
+
+<td class="unit">
+    Perform Masonry Work
+</td>
+
+<td>-</td>
+<td>-</td>
+
+<td>
+    <a href="#" class="view-btn">
+        View
+    </a>
+</td>
+
+<td>-</td>
+<td>-</td>
+
+<td>
+    <a href="#" class="view-btn">
+        View
+    </a>
+</td>
+
+<td>-</td>
+<td>-</td>
+
+<td>
+    <a href="#" class="view-btn">
+        View
+    </a>
+</td>
+
+<td>-</td>
+<td>-</td>
+
+</tr>
+
+
+<tr>
+
+<td class="unit">
+    Perform Masonry Work Finishes
+</td>
+
+<td>-</td>
+<td>-</td>
+
+<td>
+    <a href="#" class="view-btn">
+        View
+    </a>
+</td>
+
+<td>-</td>
+<td>-</td>
+
+<td>
+    <a href="#" class="view-btn">
+        View
+    </a>
+</td>
+
+<td>-</td>
+<td>-</td>
+
+<td>
+    <a href="#" class="view-btn">
+        View
+    </a>
+</td>
+
+<td>-</td>
+<td>-</td>
+
+</tr>
+
+
+<tr>
+
+<td class="unit">
+    Produce Masonry Products
+</td>
+
+<td>-</td>
+<td>-</td>
+
+<td>
+    <a href="#" class="view-btn">
+        View
+    </a>
+</td>
+
+<td>-</td>
+<td>-</td>
+
+<td>
+    <a href="#" class="view-btn">
+        View
+    </a>
+</td>
+
+<td>-</td>
+<td>-</td>
+
+<td>
+    <a href="#" class="view-btn">
+        View
+    </a>
+</td>
+
+<td>-</td>
+<td>-</td>
+
+</tr>
+
+
+
+<!-- STUDENT 2 -->
+
+<tr>
+
+<td rowspan="3" class="student">
+    STUDENT 2
+</td>
+
+<td class="unit">
+    Perform Masonry Work
+</td>
+
+<td>-</td><td>-</td>
+
+<td><a href="#" class="view-btn">View</a></td>
+
+<td>-</td><td>-</td>
+
+<td><a href="#" class="view-btn">View</a></td>
+
+<td>-</td><td>-</td>
+
+<td><a href="#" class="view-btn">View</a></td>
+
+<td>-</td><td>-</td>
+
+</tr>
+
+<tr>
+
+<td class="unit">
+    Perform Masonry Work Finishes
+</td>
+
+<td>-</td><td>-</td>
+
+<td><a href="#" class="view-btn">View</a></td>
+
+<td>-</td><td>-</td>
+
+<td><a href="#" class="view-btn">View</a></td>
+
+<td>-</td><td>-</td>
+
+<td><a href="#" class="view-btn">View</a></td>
+
+<td>-</td><td>-</td>
+
+</tr>
+
+<tr>
+
+<td class="unit">
+    Produce Masonry Products
+</td>
+
+<td>-</td><td>-</td>
+
+<td><a href="#" class="view-btn">View</a></td>
+
+<td>-</td><td>-</td>
+
+<td><a href="#" class="view-btn">View</a></td>
+
+<td>-</td><td>-</td>
+
+<td><a href="#" class="view-btn">View</a></td>
+
+<td>-</td><td>-</td>
+
+</tr>
+
+
+
+<!-- STUDENTS 3-10 -->
+
+<script>
+
+const units = [
+    "Perform Masonry Work",
+    "Perform Masonry Work Finishes",
+    "Produce Masonry Products"
+];
+
+for (let student = 3; student <= 10; student++) {
+
+    document.write(`
+    
+        <tr>
+
+            <td rowspan="3" class="student">
+                STUDENT ${student}
+            </td>
+
+            <td class="unit">
+                ${units[0]}
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="view-btn">
+                    View
+                </a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="view-btn">
+                    View
+                </a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="view-btn">
+                    View
+                </a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="unit">
+                ${units[1]}
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="view-btn">
+                    View
+                </a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="view-btn">
+                    View
+                </a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="view-btn">
+                    View
+                </a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="unit">
+                ${units[2]}
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="view-btn">
+                    View
+                </a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="view-btn">
+                    View
+                </a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="view-btn">
+                    View
+                </a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+    `);
+
+}
+
+</script>
+
+
+</tbody>
+
+</table>
+
+</div>
+
+
+
+<!-- =====================================================
+     STUDENT E-PORTFOLIO
+===================================================== -->
+
+<div class="card">
+
+    <h3>
+        TRAINERS-PORTFOLIO
+    </h3>
+
+
+    <h4>
+        Perform Masonry Work
+    </h4>
+
+    <div class="assessment">
+
+        <span>
+            Practical 1
+        </span>
+
+        <a href="masonry_practical1.pdf"
+           class="view-btn">
+            View Practical 1
+        </a>
+
+    </div>
+
+
+    <div class="assessment">
+
+        <span>
+            Practical 2
+        </span>
+
+        <a href="masonry_practical2.pdf"
+           class="view-btn">
+            View Practical 2
+        </a>
+
+    </div>
+
+
+    <div class="assessment">
+
+        <span>
+            Practical 3
+        </span>
+
+        <a href="masonry_practical3.pdf"
+           class="view-btn">
+            View Practical 3
+        </a>
+
+    </div>
+
+
+
+    <h4>
+        Perform Masonry Work Finishes
+    </h4>
+
+    <div class="assessment">
+
+        <span>
+            Practical 1
+        </span>
+
+        <a href="finishes_practical1.pdf"
+           class="view-btn">
+            View Practical 1
+        </a>
+
+    </div>
+
+
+    <div class="assessment">
+
+        <span>
+            Practical 2
+        </span>
+
+        <a href="finishes_practical2.pdf"
+           class="view-btn">
+            View Practical 2
+        </a>
+
+    </div>
+
+
+    <div class="assessment">
+
+        <span>
+            Practical 3
+        </span>
+
+        <a href="finishes_practical3.pdf"
+           class="view-btn">
+            View Practical 3
+        </a>
+
+    </div>
+
+
+
+    <h4>
+        Produce Masonry Products
+    </h4>
+
+    <div class="assessment">
+
+        <span>
+            Practical 1
+        </span>
+
+        <a href="products_practical1.pdf"
+           class="view-btn">
+            View Practical 1
+        </a>
+
+    </div>
+
+
+    <div class="assessment">
+
+        <span>
+            Practical 2
+        </span>
+
+        <a href="products_practical2.pdf"
+           class="view-btn">
+            View Practical 2
+        </a>
+
+    </div>
+
+
+    <div class="assessment">
+
+        <span>
+            Practical 3
+        </span>
+
+        <a href="products_practical3.pdf"
+           class="view-btn">
+            View Practical 3
+        </a>
+
+    </div>
+
+</div>
+
+
+
+<!-- =====================================================
+     OBSERVATION CHECKLIST
+===================================================== -->
+
+<div class="card">
+
+    <h3>
+        CONTINUOUS PRACTICAL OBSERVATION CHECKLIST
+    </h3>
+
+
+    <h4>
+        Perform Masonry Work
+    </h4>
+
+    <p>
+        Practical 1 Checklist
+
+        <a href="masonry_checklist1.pdf"
+           class="view-btn">
+            View Checklist
+        </a>
+    </p>
+
+    <p>
+        Practical 2 Checklist
+
+        <a href="masonry_checklist2.pdf"
+           class="view-btn">
+            View Checklist
+        </a>
+    </p>
+
+    <p>
+        Practical 3 Checklist
+
+        <a href="masonry_checklist3.pdf"
+           class="view-btn">
+            View Checklist
+        </a>
+    </p>
+
+
+    <h4>
+        Perform Masonry Work Finishes
+    </h4>
+
+    <p>
+        Practical 1 Checklist
+
+        <a href="finishes_checklist1.pdf"
+           class="view-btn">
+            View Checklist
+        </a>
+    </p>
+
+    <p>
+        Practical 2 Checklist
+
+        <a href="finishes_checklist2.pdf"
+           class="view-btn">
+            View Checklist
+        </a>
+    </p>
+
+    <p>
+        Practical 3 Checklist
+
+        <a href="finishes_checklist3.pdf"
+           class="view-btn">
+            View Checklist
+        </a>
+    </p>
+
+
+    <h4>
+        Produce Masonry Products
+    </h4>
+
+    <p>
+        Practical 1 Checklist
+
+        <a href="products_checklist1.pdf"
+           class="view-btn">
+            View Checklist
+        </a>
+    </p>
+
+    <p>
+        Practical 2 Checklist
+
+        <a href="products_checklist2.pdf"
+           class="view-btn">
+            View Checklist
+        </a>
+    </p>
+
+    <p>
+        Practical 3 Checklist
+
+        <a href="products_checklist3.pdf"
+           class="view-btn">
+            View Checklist
+        </a>
+    </p>
+
+</div>
+
+
+</div>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <p>
+        <strong>
+            ABERDARE TECHNICAL COLLEGE
+        </strong>
+    </p>
+
+    <p>
+        Building Department | Module 1
+    </p>
+
+    <p>
+            &copy; 2026 James ndirangu|jojahr solutions|ICT department.
+            All Rights Reserved.
+        </div>
+    </footer>
+    </p>
+
+</footer>
+
+
+
+<!-- =====================================================
+     HAMBURGER JAVASCRIPT
+===================================================== -->
+
+<script>
+
+function toggleMenu() {
+
+    const menu =
+        document.getElementById("navMenu");
+
+    menu.classList.toggle("show");
+
+}
+
+
+/* Close menu after selecting a link */
+
+document.querySelectorAll(".nav-menu a")
+.forEach(function(link) {
+
+    link.addEventListener("click", function() {
+
+        document
+        .getElementById("navMenu")
+        .classList.remove("show");
+
+    });
+
+});
+
+
+/* Close menu when clicking outside */
+
+document.addEventListener("click", function(event) {
+
+    const navbar =
+        document.querySelector(".navbar");
+
+    const menu =
+        document.getElementById("navMenu");
+
+    if (!navbar.contains(event.target)) {
+
+        menu.classList.remove("show");
+
+    }
+
+});
+
+</script>
+
+
+</body>
+</html>
+```

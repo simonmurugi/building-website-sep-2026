@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aberdare Technical College - Building and Plumbing Training">
+    <title>Home - Aberdare Technical College</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --primary: #800000;         /* Classic Maroon */
+            --primary-dark: #4a0000;    /* Dark Maroon */
+            --secondary: #d97706;       /* Accent Gold/Amber */
+            --dark: #2b080c;            /* Deep Maroon / Black */
+            --light: #fdf2f2;           /* Soft Rose Tint */
+            --white: #ffffff;
+            --text: #1e293b;
+            --accent: #b91c1c;          /* Deep Crimson Accent */
+            --soft: #fecdd3;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--light);
+        }
+
+        /* ================= NAVIGATION ================= */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(74, 0, 0, 0.96);
+            box-shadow: 0 3px 15px rgba(0,0,0,0.2);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+        }
+
+        .logo {
+            color: var(--white);
+            font-size: 20px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        #menu-toggle {
+            display: none;
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background: var(--secondary);
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .nav-menu {
+            position: absolute;
+            top: 70px;
+            right: 25px;
+            width: 270px;
+            max-height: 0;
+            overflow: hidden;
+            background: var(--dark);
+            border-radius: 0 0 12px 12px;
+            transition: max-height 0.4s ease;
+        }
+
+        .nav-menu a {
+            display: block;
+            color: var(--white);
+            text-decoration: none;
+            padding: 13px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            transition: 0.3s;
+        }
+
+        .nav-menu a:hover {
+            background: var(--primary);
+            color: var(--white);
+            padding-left: 28px;
+        }
+
+        #menu-toggle:checked ~ .nav-menu {
+            max-height: 650px;
+        }
+
+        #menu-toggle:checked + .hamburger span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        #menu-toggle:checked + .hamburger span:nth-child(2) {
+            opacity: 0;
+        }
+
+        #menu-toggle:checked + .hamburger span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ================= COVER ================= */
+        .hero {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+            background-size: cover;
+            background-position: center;
+            animation: coverImages 20s infinite;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            background: linear-gradient(
+                90deg,
+                rgba(43, 8, 12, 0.9),
+                rgba(80, 10, 20, 0.7),
+                rgba(0, 0, 0, 0.55)
+            );
+        }
+
+        @keyframes coverImages {
+            0%, 20% {
+                background-image: url("b1.jpeg");
+            }
+            25%, 45% {
+                background-image: url("b2.jpeg");
+            }
+            50%, 70% {
+                background-image: url("b3.jpeg");
+            }
+            75%, 95% {
+                background-image: url("b4.jpeg");
+            }
+            100% {
+                background-image: url("b5.jpeg");
+            }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 100px 25px 50px;
+            animation: heroText 1.2s ease;
+        }
+
+        @keyframes heroText {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-weight: bold;
+            margin-bottom: 18px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 6vw, 5rem);
+            line-height: 1.05;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 span {
+            color: var(--secondary);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.3rem);
+            margin-bottom: 28px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+
+        .btn-outline {
+            border: 2px solid var(--white);
+            color: var(--white);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+
+        /* ================= GENERAL ================= */
+        section {
+            padding: 80px 20px;
+        }
+
+        .container {
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            color: var(--primary);
+            font-size: 2.3rem;
+            margin-bottom: 8px;
+        }
+
+        .section-title p {
+            max-width: 700px;
+            margin: auto;
+            color: #64748b;
+        }
+
+        /* ================= QUICK LINKS ================= */
+        .quick-links {
+            background: var(--white);
+        }
+
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+
+        .quick-btn {
+            background: var(--primary);
+            color: var(--white);
+            text-decoration: none;
+            padding: 25px 15px;
+            text-align: center;
+            border-radius: 10px;
+            font-weight: bold;
+            border-bottom: 4px solid var(--secondary);
+            transition: 0.3s;
+        }
+
+        .quick-btn:hover {
+            transform: translateY(-6px);
+            background: var(--secondary);
+            color: var(--dark);
+        }
+
+        /* ================= ABOUT ================= */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .info-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            border-left: 5px solid var(--secondary);
+        }
+
+        .info-card h3 {
+            color: var(--primary);
+            margin-bottom: 12px;
+            font-size: 1.5rem;
+        }
+
+        /* ================= TRAINING ================= */
+        .training {
+            background: #fcf0f0;
+        }
+
+        .training-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
+
+        .training-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .training-card:hover {
+            transform: translateY(-7px);
+        }
+
+        .training-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .training-content {
+            padding: 22px;
+        }
+
+        .training-content h3 {
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        /* ================= INQUIRY FORM ================= */
+        .inquiry-grid {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 35px;
+            border-radius: 20px;
+            align-items: start;
+        }
+
+        .contact-info {
+            background: var(--primary);
+            color: var(--white);
+            padding: 35px;
+            border-radius: 12px;
+        }
+
+        .contact-info h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+        }
+
+        .contact-info p {
+            margin-bottom: 12px;
+        }
+
+        .form-box {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font: inherit;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--secondary);
+        }
+
+        textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        /* ================= FOOTER ================= */
+        footer {
+            background: var(--dark);
+            color: #e2e8f0;
+            padding: 45px 20px 20px;
+        }
+
+        .footer-grid {
+            max-width: 1150px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 30px;
+        }
+
+        footer h3 {
+            color: var(--secondary);
+            margin-bottom: 12px;
+        }
+
+        footer a {
+            color: #e2e8f0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 7px;
+        }
+
+        footer a:hover {
+            color: var(--secondary);
+        }
+
+        .copyright {
+            max-width: 1150px;
+            margin: 30px auto 0;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 850px) {
+            .quick-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .about-grid,
+            .training-grid,
+            .inquiry-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .nav-container {
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 16px;
+            }
+
+            .nav-menu {
+                right: 10px;
+                left: 10px;
+                width: auto;
+            }
+
+            .quick-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 65px 15px;
+            }
+
+            .hero-content {
+                padding-top: 110px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVIGATION ================= -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">ABERDARE <span>TECHNICAL COLLEGE</span></a>
+
+            <input type="checkbox" id="menu-toggle">
+
+            <label for="menu-toggle" class="hamburger" aria-label="Open navigation menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <nav class="nav-menu">
+                <a href="index.html">Home</a>
+                <a href="contacts.html">Contacts</a>
+                <a href="building.html">Building Department</a>
+                <a href="plumbing.html">Plumbing Department</a>
+                <a href="#about">About Us</a>
+                <a href="student-reports.html">Student Reports</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ================= COVER ================= -->
+    <main id="home">
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">BUILDING & PLUMBING DEPARTMENT</div>
+
+                <h1>
+                    ABERDARE<br>
+                    <span>TECHNICAL COLLEGE</span>
+                </h1>
+
+                <p>
+                    Building skilled professionals through practical,
+                    competency-based training in Building and Plumbing.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="#training" class="btn btn-primary">Explore Training</a>
+                    <a href="#inquiries" class="btn btn-outline">Make an Inquiry</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= QUICK LINKS ================= -->
+        <section class="quick-links">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Training Resources</h2>
+                    <p>Quick access to important Building and Plumbing training resources.</p>
+                </div>
+
+                <div class="quick-grid">
+                    <a class="quick-btn" href="curriculum.html">Curriculum</a>
+                    <a class="quick-btn" href="occupational-standards.html">Occupational Standards</a>
+                    <a class="quick-btn" href="learning-materials.html">Learning Materials</a>
+                    <a class="quick-btn" href="timetable.html">Timetable</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= MISSION & VISION ================= -->
+        <section id="about">
+            <div class="container">
+                <div class="section-title">
+                    <h2>About Building & Plumbing</h2>
+                    <p>Developing practical skills, professionalism and industry-ready graduates.</p>
+                </div>
+
+                <div class="about-grid">
+                    <div class="info-card">
+                        <h3>Our Mission</h3>
+                        <p>
+                            To provide quality, practical and competency-based Building
+                            and Plumbing training that equips learners with relevant
+                            technical skills, professional values and the ability to
+                            respond effectively to industry and community needs.
+                        </p>
+                    </div>
+
+                    <div class="info-card">
+                        <h3>Our Vision</h3>
+                        <p>
+                            To be a centre of excellence in Building and Plumbing
+                            technical training, producing innovative, competent and
+                            responsible professionals for the construction industry.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= TRAINING HIGHLIGHTS ================= -->
+        <section class="training" id="training">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Training Highlights</h2>
+                    <p>
+                        Practical learning experiences designed to prepare students
+                        for real construction and plumbing work environments.
+                    </p>
+                </div>
+
+                <div class="training-grid">
+
+                    <article class="training-card">
+                        <img src="b2.jpeg"
+                             alt="Construction workers on a building project">
+                        <div class="training-content">
+                            <h3>Building Construction</h3>
+                            <p>
+                                Hands-on training in construction practices, setting out,
+                                masonry, concrete work, finishing and other essential
+                                building skills.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="training-card">
+                        <img src="simon1 .jpeg"
+                             alt="Plumbing tools and installation work">
+                        <div class="training-content">
+                            <h3>CDACC practicals</h3>
+                            <p>
+                                Practical training in water supply systems, sanitary
+                                installations, pipework, fittings, maintenance and
+                                plumbing safety.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="training-card">
+                        <img src="simon3.jpeg"
+                             alt="Construction site and building work">
+                        <div class="training-content">
+                            <h3>Site Practice</h3>
+                            <p>
+                                Students develop workplace skills through practical
+                                activities, teamwork, safety procedures and construction
+                                site practices.
+                            </p>
+                        </div>
+                    </article>
+
+                    <article class="training-card">
+                        <img src="b4.jpeg"
+                             alt="Technical worker using equipment">
+                        <div class="training-content">
+                            <h3>Technical Skills Development</h3>
+                            <p>
+                                Emphasis is placed on accurate measurements, use of tools,
+                                problem solving, quality workmanship and professional
+                                standards.
+                            </p>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= INQUIRIES ================= -->
+        <section id="inquiries">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Student & Assessor Inquiries</h2>
+                    <p>Send your question or request using the form below.</p>
+                </div>
+
+                <div class="inquiry-grid">
+
+                    <div class="contact-info">
+                        <h3>Need Assistance?</h3>
+                        <p>
+                            This inquiry form is available for students, assessors and
+                            other Building and Plumbing training stakeholders.
+                        </p>
+
+                        <p><strong>Students:</strong> Ask about modules, learning materials,
+                            practical activities, timetables and assessments.</p>
+
+                        <p><strong>Assessors:</strong> Send inquiries concerning assessment,
+                            occupational standards, practical activities and learner records.</p>
+                    </div>
+
+                    <form class="form-box" action="#" method="post">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="role">I am a</label>
+                            <select id="role" name="role" required>
+                                <option value="">-- Select --</option>
+                                <option value="student">Student</option>
+                                <option value="assessor">Assessor</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <input type="text" id="subject" name="subject" placeholder="Inquiry subject" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" placeholder="Write your inquiry here..." required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary submit-btn">
+                            Submit Inquiry
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h3>ABERDARE TECHNICAL COLLEGE</h3>
+                <p>
+                    Building & Plumbing Department — developing competent,
+                    innovative and industry-ready technical professionals.
+                </p>
+            </div>
+
+            <div>
+                <h3>Quick Links</h3>
+                <a href="index.html">Home</a>
+                <a href="about.html">About Us</a>
+                <a href="#training">Training Highlights</a>
+                <a href="#inquiries">Inquiries</a>
+            </div>
+
+            <div>
+                <h3>Resources</h3>
+                <a href="curriculum.html">Curriculum</a>
+                <a href="occupational-standards.html">Occupational Standards</a>
+                <a href="learning-materials.html">Learning Materials</a>
+                <a href="timetable.html">Timetable</a>
+            </div>
+        </div>
+
+        <div class="copyright">
+            &copy; 2026 James ndirangu|jojahr solutions|ICT department.
+            All Rights Reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

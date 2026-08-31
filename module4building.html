@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Module 4 - Building</title>
+
+    <style>
+        :root {
+            --maroon: #800000;
+            --dark-maroon: #5a0000;
+            --light-maroon: #a52a2a;
+            --gold: #d4af37;
+            --white: #ffffff;
+            --light: #f5f5f5;
+            --dark: #333333;
+            --blue: #0984e3;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: linear-gradient(135deg, var(--dark-maroon), var(--maroon));
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 32px;
+        }
+
+        header p {
+            margin: 8px 0 0;
+            font-size: 16px;
+        }
+
+        /* ================= HAMBURGER ================= */
+
+        .menu-toggle {
+            position: fixed;
+            top: 18px;
+            left: 18px;
+            z-index: 2000;
+            width: 48px;
+            height: 45px;
+            border: none;
+            border-radius: 6px;
+            background: var(--maroon);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 27px;
+            height: 3px;
+            margin: 5px auto;
+            background: white;
+            border-radius: 3px;
+        }
+
+        /* ================= SIDE MENU ================= */
+
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -280px;
+            width: 280px;
+            height: 100%;
+            background: var(--dark-maroon);
+            z-index: 1500;
+            padding-top: 75px;
+            transition: left 0.35s ease;
+            overflow-y: auto;
+            box-shadow: 3px 0 10px rgba(0,0,0,0.3);
+        }
+
+        .side-menu.active {
+            left: 0;
+        }
+
+        .side-menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 15px 22px;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+            font-weight: 600;
+            text-transform: capitalize;
+            transition: 0.3s;
+        }
+
+        .side-menu a:hover {
+            background: var(--light-maroon);
+            padding-left: 30px;
+        }
+
+        .menu-title {
+            color: var(--gold);
+            padding: 15px 22px;
+            font-weight: bold;
+            font-size: 18px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* ================= OVERLAY ================= */
+
+        .overlay {
+            position: fixed;
+            display: none;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            width: 95%;
+            max-width: 1500px;
+            margin: auto;
+            padding: 25px 10px;
+        }
+
+        h2 {
+            color: var(--maroon);
+            margin-top: 35px;
+            border-left: 6px solid var(--gold);
+            padding-left: 12px;
+        }
+
+        h3 {
+            color: var(--dark-maroon);
+        }
+
+        /* ================= UNIT TABLE ================= */
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            margin-bottom: 35px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background: var(--maroon);
+            color: white;
+        }
+
+        tr:nth-child(even) td {
+            background: #fafafa;
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .btn {
+            background: var(--blue);
+            color: white;
+            padding: 7px 12px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 13px;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #0263b3;
+            transform: translateY(-1px);
+        }
+
+        .maroon-btn {
+            background: var(--maroon);
+        }
+
+        .maroon-btn:hover {
+            background: var(--dark-maroon);
+        }
+
+        /* ================= ASSESSMENT TABLE ================= */
+
+        .score-table {
+            min-width: 1000px;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 35px;
+        }
+
+        .empty-score {
+            color: #777;
+            font-style: italic;
+        }
+
+        /* ================= CARDS ================= */
+
+        .card {
+            background: white;
+            padding: 22px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        /* ================= TRAINER PORTFOLIO ================= */
+
+        .portfolio-unit {
+            border: 1px solid #ddd;
+            border-left: 6px solid var(--maroon);
+            margin: 20px 0;
+            padding: 18px;
+            border-radius: 6px;
+            background: #fff;
+        }
+
+        .portfolio-unit h3 {
+            margin-top: 0;
+            color: var(--maroon);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .portfolio-item {
+            background: #f8f8f8;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 7px;
+        }
+
+        .portfolio-item strong {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--dark-maroon);
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: var(--dark-maroon);
+            color: white;
+            text-align: center;
+            padding: 35px 15px;
+            margin-top: 50px;
+        }
+
+        footer p {
+            margin: 7px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 700px) {
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            .container {
+                width: 98%;
+                padding: 15px 5px;
+            }
+
+            th,
+            td {
+                padding: 8px;
+                font-size: 13px;
+            }
+
+            .side-menu {
+                width: 260px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HAMBURGER BUTTON ================= -->
+
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- ================= SIDE NAVIGATION ================= -->
+
+    <div class="side-menu" id="sideMenu">
+
+        <div class="menu-title">
+            ABERDARE TECHNICAL COLLEGE
+        </div>
+
+        <a href="index.html">Home</a>
+        <a href="module1building.html">Module 1</a>
+        <a href="module2building.html">Module 2</a>
+        <a href="module3building.html">Module 3</a>
+        <a href="module4building.html">Module 4</a>
+        <a href="module5.html">Module 5</a>
+        <a href="module6.html">Module 6</a>
+        <a href="contact.html">Contacts</a>
+        <a href="about.html">About Us</a>
+        <a href="reports.html">Student Reports</a>
+        <a href="assessment.html">Assessment Score Sheet</a>
+        <a href="recordofwork.html">Record of Work</a>
+
+    </div>
+
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+
+        <h1>Module 4 - Building Department</h1>
+
+        <p>
+            Competency Assessment and Training Portfolio
+        </p>
+
+        <p>
+            Aberdare Technical College
+        </p>
+
+    </header>
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <div class="container">
+
+        <!-- ================= UNITS ================= -->
+
+        <h2>Module 4 Units</h2>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <tr>
+                    <th>No.</th>
+                    <th>Unit</th>
+                    <th>Learning Plan</th>
+                    <th>Unit Resources</th>
+                </tr>
+
+                <tr>
+                    <td>1</td>
+                    <td>Mathematics 2</td>
+                    <td>
+                        <a href="#" class="btn">
+                            View Learning Plan
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="btn">
+                            View Resources
+                        </a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>Construction Material Science</td>
+                    <td>
+                        <a href="#" class="btn">
+                            View Learning Plan
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="btn">
+                            View Resources
+                        </a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>3</td>
+                    <td>Entrepreneurial Skills</td>
+                    <td>
+                        <a href="#" class="btn">
+                            View Learning Plan
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="btn">
+                            View Resources
+                        </a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>4</td>
+                    <td>Work Ethics</td>
+                    <td>
+                        <a href="#" class="btn">
+                            View Learning Plan
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="btn">
+                            View Resources
+                        </a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>5</td>
+                    <td>Super Structure Works</td>
+                    <td>
+                        <a href="#" class="btn">
+                            View Learning Plan
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="btn">
+                            View Resources
+                        </a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>6</td>
+                    <td>Masonry Work Finishes 2</td>
+                    <td>
+                        <a href="#" class="btn">
+                            View Learning Plan
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#" class="btn">
+                            View Resources
+                        </a>
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+
+        <!-- ================= PRACTICAL ASSESSMENT ================= -->
+
+        <h2>Practical Assessment Scores</h2>
+
+        <p>
+            The assessment score sheet is prepared for 10 students.
+            Marks can be entered when assessments are completed.
+        </p>
+
+        <div class="table-wrapper">
+
+            <table class="score-table">
+
+                <tr>
+                    <th>Student</th>
+                    <th>Unit</th>
+                    <th>Practical 1</th>
+                    <th>View Exam</th>
+                    <th>Practical 2</th>
+                    <th>View Exam</th>
+                    <th>Practical 3</th>
+                    <th>View Exam</th>
+                    <th>Average</th>
+                </tr>
+
+                <!-- STUDENT 1 -->
+
+                <tr>
+                    <td rowspan="6"><b>Student 1</b></td>
+                    <td>Mathematics 2</td>
+                    <td class="empty-score">-</td>
+                    <td><a href="#" class="btn">View Exam</a></td>
+                    <td class="empty-score">-</td>
+                    <td><a href="#" class="btn">View Exam</a></td>
+                    <td class="empty-score">-</td>
+                    <td><a href="#" class="btn">View Exam</a></td>
+                    <td>-</td>
+                </tr>
+
+                <tr>
+                    <td>Construction Material Science</td>
+                    <td>-</td>
+                    <td><a href="#" class="btn">View Exam</a></td>
+                    <td>-</td>
+                    <td><a href="#" class="btn">View Exam</a></td>
+                    <td>-</td>
+                    <td><a href="#" class="btn">View Exam</a></td>
+                    <td>-</td>
+                </tr>
+
+                <tr>
+                    <td>Entrepreneurial Skills</td>
+                    <td>-</td>
+                    <td><a href="#" class="btn">View Exam</a></td>
+                    <td>-</td>
+                    <td><a href="#" class="btn">View Exam</a></td>
+                    <td>-</td>
+                    <td><a href="#" class="btn">View Exam</a></td>
+                    <td>-</td>
+                </tr>
+
+                <tr>
+                    <td>Work Ethics</td>
+                    <td>-</td>
+                    <td><a href="#" class="btn">View Exam</a></td>
+                    <td>-</td>
+                    <td><a href="#" class="btn">View Exam</a></td>
+                    <td>-</td>
+                    <td><a href="#" class="btn">View Exam</a></td>
+                    <td>-</td>
+                </tr>
+
+                <tr>
+                    <td>Super Structure Works</td>
+                    <td>-</td>
+                    <td><a href="#" class="btn">View Exam</a></td>
+                    <td>-</td>
+                    <td><a href="#" class="btn">View Exam</a></td>
+                    <td>-</td>
+                    <td><a href="#" class="btn">View Exam</a></td>
+                    <td>-</td>
+                </tr>
+
+                <tr>
+                    <td>Masonry Work Finishes 2</td>
+                    <td>-</td>
+                    <td><a href="#" class="btn">View Exam</a></td>
+                    <td>-</td>
+                    <td><a href="#" class="btn">View Exam</a></td>
+                    <td>-</td>
+                    <td><a href="#" class="btn">View Exam</a></td>
+                    <td>-</td>
+                </tr>
+
+                <!-- STUDENTS 2-10 -->
+
+                <script>
+
+                    const units = [
+                        "Mathematics 2",
+                        "Construction Material Science",
+                        "Entrepreneurial Skills",
+                        "Work Ethics",
+                        "Super Structure Works",
+                        "Masonry Work Finishes 2"
+                    ];
+
+                    for (let student = 2; student <= 10; student++) {
+
+                        document.write(
+                            `<tr>
+                                <td rowspan="6"><b>Student ${student}</b></td>
+                                <td>${units[0]}</td>
+                                <td>-</td>
+                                <td><a href="#" class="btn">View Exam</a></td>
+                                <td>-</td>
+                                <td><a href="#" class="btn">View Exam</a></td>
+                                <td>-</td>
+                                <td><a href="#" class="btn">View Exam</a></td>
+                                <td>-</td>
+                            </tr>`
+                        );
+
+                        for (let i = 1; i < units.length; i++) {
+
+                            document.write(
+                                `<tr>
+                                    <td>${units[i]}</td>
+                                    <td>-</td>
+                                    <td><a href="#" class="btn">View Exam</a></td>
+                                    <td>-</td>
+                                    <td><a href="#" class="btn">View Exam</a></td>
+                                    <td>-</td>
+                                    <td><a href="#" class="btn">View Exam</a></td>
+                                    <td>-</td>
+                                </tr>`
+                            );
+
+                        }
+                    }
+
+                </script>
+
+            </table>
+
+        </div>
+
+
+        <!-- ================= CAT ASSESSMENT ================= -->
+
+        <h2>CAT Assessment Scores</h2>
+
+        <p>
+            Each student undertakes CAT assessments for all six Module 4 units.
+        </p>
+
+        <div class="table-wrapper">
+
+            <table class="score-table">
+
+                <tr>
+                    <th>Student</th>
+                    <th>Unit</th>
+                    <th>CAT 1</th>
+                    <th>View CAT</th>
+                    <th>CAT 2</th>
+                    <th>View CAT</th>
+                    <th>CAT 3</th>
+                    <th>View CAT</th>
+                    <th>Average</th>
+                </tr>
+
+                <script>
+
+                    for (let student = 1; student <= 10; student++) {
+
+                        for (let i = 0; i < units.length; i++) {
+
+                            document.write(
+                                `<tr>
+                                    ${i === 0 ?
+                                    `<td rowspan="6"><b>Student ${student}</b></td>` :
+                                    ``}
+
+                                    <td>${units[i]}</td>
+
+                                    <td>-</td>
+                                    <td>
+                                        <a href="#" class="btn">View CAT 1</a>
+                                    </td>
+
+                                    <td>-</td>
+                                    <td>
+                                        <a href="#" class="btn">View CAT 2</a>
+                                    </td>
+
+                                    <td>-</td>
+                                    <td>
+                                        <a href="#" class="btn">View CAT 3</a>
+                                    </td>
+
+                                    <td>-</td>
+                                </tr>`
+                            );
+
+                        }
+
+                    }
+
+                </script>
+
+            </table>
+
+        </div>
+
+
+        <!-- ================= TRAINER'S PORTFOLIO ================= -->
+
+        <h2>Trainer's Portfolio</h2>
+
+        <div class="card">
+
+            <h3>Module 4 Trainer's Assessment Portfolio</h3>
+
+            <p>
+                This section contains assessment documents, practical
+                activities, observation checklists, CAT papers and
+                marking schemes for each Module 4 unit.
+            </p>
+
+        </div>
+
+
+        <!-- ================= PORTFOLIO UNITS ================= -->
+
+        <div id="trainerPortfolio"></div>
+
+
+        <script>
+
+            const portfolioUnits = [
+                "Mathematics 2",
+                "Construction Material Science",
+                "Entrepreneurial Skills",
+                "Work Ethics",
+                "Super Structure Works",
+                "Masonry Work Finishes 2"
+            ];
+
+            const portfolioContainer =
+                document.getElementById("trainerPortfolio");
+
+            portfolioUnits.forEach((unit, index) => {
+
+                let unitNumber = index + 1;
+
+                portfolioContainer.innerHTML += `
+
+                    <div class="portfolio-unit">
+
+                        <h3>
+                            Unit ${unitNumber}: ${unit}
+                        </h3>
+
+                        <div class="portfolio-grid">
+
+                            <!-- PRACTICALS -->
+
+                            <div class="portfolio-item">
+                                <strong>Practical 1</strong>
+                                <a href="#" class="btn">
+                                    View Practical 1
+                                </a>
+                            </div>
+
+                            <div class="portfolio-item">
+                                <strong>Practical 2</strong>
+                                <a href="#" class="btn">
+                                    View Practical 2
+                                </a>
+                            </div>
+
+                            <div class="portfolio-item">
+                                <strong>Practical 3</strong>
+                                <a href="#" class="btn">
+                                    View Practical 3
+                                </a>
+                            </div>
+
+                            <!-- OBSERVATION CHECKLISTS -->
+
+                            <div class="portfolio-item">
+                                <strong>Observation Checklist 1</strong>
+                                <a href="#" class="btn">
+                                    View Checklist 1
+                                </a>
+                            </div>
+
+                            <div class="portfolio-item">
+                                <strong>Observation Checklist 2</strong>
+                                <a href="#" class="btn">
+                                    View Checklist 2
+                                </a>
+                            </div>
+
+                            <div class="portfolio-item">
+                                <strong>Observation Checklist 3</strong>
+                                <a href="#" class="btn">
+                                    View Checklist 3
+                                </a>
+                            </div>
+
+                            <!-- CATS -->
+
+                            <div class="portfolio-item">
+                                <strong>CAT 1</strong>
+                                <a href="#" class="btn">
+                                    View CAT 1
+                                </a>
+                            </div>
+
+                            <div class="portfolio-item">
+                                <strong>CAT 2</strong>
+                                <a href="#" class="btn">
+                                    View CAT 2
+                                </a>
+                            </div>
+
+                            <div class="portfolio-item">
+                                <strong>CAT 3</strong>
+                                <a href="#" class="btn">
+                                    View CAT 3
+                                </a>
+                            </div>
+
+                            <!-- MARKING SCHEMES -->
+
+                            <div class="portfolio-item">
+                                <strong>CAT 1 Marking Scheme</strong>
+                                <a href="#" class="btn">
+                                    View Marking Scheme
+                                </a>
+                            </div>
+
+                            <div class="portfolio-item">
+                                <strong>CAT 2 Marking Scheme</strong>
+                                <a href="#" class="btn">
+                                    View Marking Scheme
+                                </a>
+                            </div>
+
+                            <div class="portfolio-item">
+                                <strong>CAT 3 Marking Scheme</strong>
+                                <a href="#" class="btn">
+                                    View Marking Scheme
+                                </a>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            });
+
+        </script>
+
+
+        <!-- ================= RECORD OF WORK ================= -->
+
+        <h2>Record of Work</h2>
+
+        <div class="card">
+
+            <p>
+                <strong>Module:</strong> Module 4 - Building
+            </p>
+
+            <p>
+                <strong>Units:</strong>
+                Mathematics 2,
+                Construction Material Science,
+                Entrepreneurial Skills,
+                Work Ethics,
+                Super Structure Works,
+                Masonry Work Finishes 2
+            </p>
+
+            <a href="recordofwork.html" class="btn maroon-btn">
+                View Record of Work
+            </a>
+
+        </div>
+
+
+        <!-- ================= ASSESSMENT SCORE SHEET ================= -->
+
+        <h2>Assessment Score Sheet</h2>
+
+        <div class="card">
+
+            <p>
+                Access the complete Module 4 assessment score sheet
+                containing practical and CAT assessment records.
+            </p>
+
+            <a href="assessment.html" class="btn maroon-btn">
+                View Assessment Score Sheet
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <p>
+            <strong>Building Department</strong>
+            | Aberdare Technical College
+        </p>
+
+        <p>
+            Module 4 - Building Competency Assessment
+        </p>
+
+        <p>
+            &copy; 2026 Aberdare Technical College.
+            All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        function toggleMenu() {
+
+            const menu =
+                document.getElementById("sideMenu");
+
+            const overlay =
+                document.getElementById("overlay");
+
+            menu.classList.toggle("active");
+
+            overlay.classList.toggle("active");
+        }
+
+        // Close menu when a navigation link is clicked
+
+        document.querySelectorAll(".side-menu a")
+            .forEach(function(link) {
+
+                link.addEventListener("click", function() {
+
+                    document
+                        .getElementById("sideMenu")
+                        .classList.remove("active");
+
+                    document
+                        .getElementById("overlay")
+                        .classList.remove("active");
+
+                });
+
+            });
+
+    </script>
+
+</body>
+</html>

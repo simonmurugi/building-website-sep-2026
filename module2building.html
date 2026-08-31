@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Module 2 - Building Department</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #222;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: #800000;
+            color: white;
+            text-align: center;
+            padding: 25px 20px 18px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        header h2 {
+            margin: 8px 0;
+            font-size: 22px;
+        }
+
+        header p {
+            margin: 5px 0;
+        }
+
+        /* ================= HAMBURGER NAVIGATION ================= */
+
+        .navbar {
+            background: #4d0000;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+            position: sticky;
+            top: 0;
+            z-index: 9999;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-title {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .hamburger {
+            width: 45px;
+            height: 42px;
+            border: none;
+            border-radius: 5px;
+            background: #800000;
+            cursor: pointer;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 27px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+        }
+
+        .hamburger:hover {
+            background: #a00000;
+        }
+
+        /* ================= MENU ================= */
+
+        .nav-menu {
+            position: absolute;
+            right: 20px;
+            top: 65px;
+
+            width: 270px;
+
+            background: #4d0000;
+
+            display: none;
+            flex-direction: column;
+
+            border-radius: 0 0 8px 8px;
+
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+
+            overflow: hidden;
+        }
+
+        .nav-menu.show {
+            display: flex;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+
+            padding: 15px 20px;
+
+            border-bottom: 1px solid #6d1a1a;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .nav-menu a:hover {
+            background: #800000;
+            padding-left: 28px;
+        }
+
+        .nav-menu a.active {
+            background: #800000;
+        }
+
+        /* ================= QUICK BUTTONS ================= */
+
+        .nav-btn-container {
+            width: 100%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            padding: 15px;
+
+            background: #660000;
+        }
+
+        .nav-btn {
+            background: #800000;
+
+            color: white;
+
+            padding: 11px 18px;
+
+            text-decoration: none;
+
+            border-radius: 5px;
+
+            font-weight: bold;
+
+            border: 1px solid #aa4444;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #a00000;
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            width: 95%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #800000;
+
+            margin-top: 30px;
+
+            border-left: 6px solid #800000;
+
+            padding-left: 10px;
+        }
+
+        /* ================= INFORMATION CARD ================= */
+
+        .info-card {
+            background: white;
+
+            padding: 20px;
+
+            margin: 20px 0;
+
+            border-radius: 8px;
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        .info-card h3 {
+            color: #800000;
+
+            margin-top: 0;
+        }
+
+        .info-card li {
+            margin: 8px 0;
+        }
+
+        /* ================= TABLE ================= */
+
+        .table-wrapper {
+            width: 100%;
+
+            overflow-x: auto;
+
+            background: white;
+
+            border-radius: 8px;
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+
+            min-width: 1200px;
+
+            border-collapse: collapse;
+
+            background: white;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+
+            padding: 10px;
+
+            text-align: center;
+        }
+
+        th {
+            background: #800000;
+
+            color: white;
+
+            font-size: 13px;
+        }
+
+        tr:nth-child(even) td {
+            background: #fafafa;
+        }
+
+        .student-name {
+            background: #f1dada !important;
+
+            color: #4d0000;
+
+            font-weight: bold;
+        }
+
+        .unit-name {
+            background: #f7e6e6 !important;
+
+            color: #4d0000;
+
+            font-weight: bold;
+
+            text-align: left;
+
+            min-width: 300px;
+        }
+
+        /* ================= BUTTON ================= */
+
+        .btn {
+            display: inline-block;
+
+            background: #800000;
+
+            color: white;
+
+            padding: 6px 10px;
+
+            text-decoration: none;
+
+            border-radius: 4px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #a00000;
+        }
+
+        /* ================= CARD ================= */
+
+        .card {
+            background: white;
+
+            padding: 20px;
+
+            margin: 20px 0;
+
+            border-radius: 8px;
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        .card h3 {
+            color: #800000;
+
+            border-bottom: 2px solid #eee;
+
+            padding-bottom: 8px;
+
+            margin-top: 0;
+        }
+
+        .card h4 {
+            color: #660000;
+
+            margin-top: 25px;
+        }
+
+        .assessment-item {
+            background: #f9eeee;
+
+            border-left: 5px solid #800000;
+
+            padding: 12px;
+
+            margin: 8px 0;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #4d0000;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px;
+
+            margin-top: 30px;
+        }
+
+        footer p {
+            margin: 5px;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 700px) {
+
+            header h1 {
+                font-size: 23px;
+            }
+
+            header h2 {
+                font-size: 18px;
+            }
+
+            .navbar {
+                padding: 0 15px;
+            }
+
+            .nav-title {
+                font-size: 14px;
+            }
+
+            .nav-menu {
+                right: 10px;
+                width: 240px;
+            }
+
+            .container {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .nav-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .assessment-item {
+                display: block;
+            }
+
+            .assessment-item .btn {
+                margin-top: 8px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <h1>ABERDARE TECHNICAL COLLEGE</h1>
+
+    <h2>BUILDING DEPARTMENT</h2>
+
+    <p>MODULE 2 - TRAINING AND ASSESSMENT</p>
+
+</header>
+
+
+<!-- ================= HAMBURGER NAVIGATION ================= -->
+
+<nav class="navbar">
+
+    <div class="nav-title">
+        BUILDING DEPARTMENT
+    </div>
+
+    <button class="hamburger"
+            onclick="toggleMenu()"
+            aria-label="Open Navigation Menu">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
+
+
+    <div class="nav-menu" id="navMenu">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="building.html">
+            Module 1
+        </a>
+
+        <a href="module2building.html" class="active">
+            Module 2
+        </a>
+
+        <a href="module3building.html">
+            Module 3
+        </a>
+
+        <a href="module4building.html">
+            Module 4
+        </a>
+
+        <a href="module5building.html">
+            Module 5
+        </a>
+
+        <a href="module6building.html">
+            Module 6
+        </a>
+
+        <a href="about.html">
+            About Us
+        </a>
+
+        <a href="reports.html">
+            Student Reports
+        </a>
+
+        <a href="contact.html">
+            Contacts
+        </a>
+ <a href="">
+        Building  sites preliminary works 1 LP
+    </a>
+ <a href="">
+        Building  temporaly works 1 LP
+    </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= QUICK ACCESS BUTTONS ================= -->
+
+<div class="nav-btn-container">
+
+    <a href="timetable.pdf" class="nav-btn">
+        Timetable
+    </a>
+
+    <a href="cu.pdf" class="nav-btn">
+        Curriculum
+    </a>
+
+    <a href="attendance.pdf" class="nav-btn">
+        Attendance
+    </a>
+
+    <a href="os.pdf" class="nav-btn">
+        Occupational Standards
+    </a>
+
+    <a href="reports.html" class="nav-btn">
+        Student Reports
+    </a>
+
+</div>
+
+
+<div class="container">
+
+
+<!-- ================= MODULE INFORMATION ================= -->
+
+<div class="info-card">
+
+    <h3>
+        Module 2 - Building Department
+    </h3>
+
+    <p>
+        This page provides the practical assessment records,
+        examination links, trainer e-portfolio and observation
+        checklists for learners undertaking Module 2 in the
+        Building Department.
+    </p>
+
+    <p>
+        <strong>Units covered in Module 2:</strong>
+    </p>
+
+    <ul>
+
+        <li>
+            Perform Building Site Preliminary Works 1
+        </li>
+
+        <li>
+            Perform Building Temporary Works
+        </li>
+
+    </ul>
+
+</div>
+
+
+<!-- ================= PRACTICAL ASSESSMENT ================= -->
+
+<h2>
+    Practical Assessment Scores
+</h2>
+
+
+<div class="table-wrapper">
+
+<table>
+
+    <thead>
+
+        <tr>
+
+            <th rowspan="2">
+                Student
+            </th>
+
+            <th rowspan="2">
+                Unit
+            </th>
+
+            <th colspan="2">
+                Practical 1
+            </th>
+
+            <th rowspan="2">
+                View Exam
+            </th>
+
+            <th colspan="2">
+                Practical 2
+            </th>
+
+            <th rowspan="2">
+                View Exam
+            </th>
+
+            <th colspan="2">
+                Practical 3
+            </th>
+
+            <th rowspan="2">
+                View Exam
+            </th>
+
+            <th rowspan="2">
+                FA Practical<br>
+                Average
+            </th>
+
+            <th rowspan="2">
+                FA Oral<br>
+                Average
+            </th>
+
+        </tr>
+
+
+        <tr>
+
+            <th>
+                Prac
+            </th>
+
+            <th>
+                Oral
+            </th>
+
+            <th>
+                Prac
+            </th>
+
+            <th>
+                Oral
+            </th>
+
+            <th>
+                Prac
+            </th>
+
+            <th>
+                Oral
+            </th>
+
+        </tr>
+
+    </thead>
+
+
+    <tbody id="assessmentTable">
+
+
+        <!-- ================= STUDENT 1 ================= -->
+
+        <tr>
+
+            <td rowspan="2" class="student-name">
+                STUDENT 1
+            </td>
+
+            <td class="unit-name">
+                Perform Building Site Preliminary Works 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="unit-name">
+                Perform Building Temporary Works
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+
+</div>
+
+
+<!-- ================= TRAINER E-PORTFOLIO ================= -->
+
+<div class="card">
+
+    <h3>
+        TRAINER'S e-PORTFOLIO
+    </h3>
+
+
+    <!-- SITE PRELIMINARY WORKS -->
+
+    <h4>
+        Perform Building Site Preliminary Works 1
+    </h4>
+
+
+    <div class="assessment-item">
+
+        <span>
+            Practical 1
+        </span>
+
+        <a href="site_preliminary_practical1.pdf"
+           class="btn">
+            View Practical 1
+        </a>
+
+    </div>
+
+
+    <div class="assessment-item">
+
+        <span>
+            Practical 2
+        </span>
+
+        <a href="site_preliminary_practical2.pdf"
+           class="btn">
+            View Practical 2
+        </a>
+
+    </div>
+
+
+    <div class="assessment-item">
+
+        <span>
+            Practical 3
+        </span>
+
+        <a href="site_preliminary_practical3.pdf"
+           class="btn">
+            View Practical 3
+        </a>
+
+    </div>
+
+
+    <!-- TEMPORARY WORKS -->
+
+    <h4>
+        Perform Building Temporary Works
+    </h4>
+
+
+    <div class="assessment-item">
+
+        <span>
+            Practical 1
+        </span>
+
+        <a href="temporary_works_practical1.pdf"
+           class="btn">
+            View Practical 1
+        </a>
+
+    </div>
+
+
+    <div class="assessment-item">
+
+        <span>
+            Practical 2
+        </span>
+
+        <a href="temporary_works_practical2.pdf"
+           class="btn">
+            View Practical 2
+        </a>
+
+    </div>
+
+
+    <div class="assessment-item">
+
+        <span>
+            Practical 3
+        </span>
+
+        <a href="temporary_works_practical3.pdf"
+           class="btn">
+            View Practical 3
+        </a>
+
+    </div>
+
+</div>
+
+
+<!-- ================= OBSERVATION CHECKLIST ================= -->
+
+<div class="card">
+
+    <h3>
+        CONTINUOUS PRACTICAL OBSERVATION CHECKLIST
+    </h3>
+
+
+    <h4>
+        Perform Building Site Preliminary Works 1
+    </h4>
+
+
+    <p>
+        Practical 1 Checklist
+
+        <a href="site_preliminary_checklist1.pdf"
+           class="btn">
+            View Checklist
+        </a>
+    </p>
+
+
+    <p>
+        Practical 2 Checklist
+
+        <a href="site_preliminary_checklist2.pdf"
+           class="btn">
+            View Checklist
+        </a>
+    </p>
+
+
+    <p>
+        Practical 3 Checklist
+
+        <a href="site_preliminary_checklist3.pdf"
+           class="btn">
+            View Checklist
+        </a>
+    </p>
+
+
+    <h4>
+        Perform Building Temporary Works
+    </h4>
+
+
+    <p>
+        Practical 1 Checklist
+
+        <a href="temporary_works_checklist1.pdf"
+           class="btn">
+            View Checklist
+        </a>
+    </p>
+
+
+    <p>
+        Practical 2 Checklist
+
+        <a href="temporary_works_checklist2.pdf"
+           class="btn">
+            View Checklist
+        </a>
+    </p>
+
+
+    <p>
+        Practical 3 Checklist
+
+        <a href="temporary_works_checklist3.pdf"
+           class="btn">
+            View Checklist
+        </a>
+    </p>
+
+</div>
+
+
+<!-- ================= STUDENT PORTFOLIO ================= -->
+
+<div class="card">
+
+    <h3>
+        STUDENT PORTFOLIO
+    </h3>
+
+    <p>
+        Student practical work, evidence, photographs and
+        completed assessment records can be accessed below.
+    </p>
+
+
+    <p>
+        <strong>Student 1</strong>
+
+        <a href="#" class="btn">
+            View Portfolio
+        </a>
+    </p>
+
+
+    <p>
+        <strong>Student 2</strong>
+
+        <a href="#" class="btn">
+            View Portfolio
+        </a>
+    </p>
+
+
+    <p>
+        <strong>Student 3</strong>
+
+        <a href="#" class="btn">
+            View Portfolio
+        </a>
+    </p>
+
+
+    <p>
+        <strong>Student 4</strong>
+
+        <a href="#" class="btn">
+            View Portfolio
+        </a>
+    </p>
+
+
+    <p>
+        <strong>Student 5</strong>
+
+        <a href="#" class="btn">
+            View Portfolio
+        </a>
+    </p>
+
+
+    <p>
+        <strong>Student 6</strong>
+
+        <a href="#" class="btn">
+            View Portfolio
+        </a>
+    </p>
+
+
+    <p>
+        <strong>Student 7</strong>
+
+        <a href="#" class="btn">
+            View Portfolio
+        </a>
+    </p>
+
+
+    <p>
+        <strong>Student 8</strong>
+
+        <a href="#" class="btn">
+            View Portfolio
+        </a>
+    </p>
+
+
+    <p>
+        <strong>Student 9</strong>
+
+        <a href="#" class="btn">
+            View Portfolio
+        </a>
+    </p>
+
+
+    <p>
+        <strong>Student 10</strong>
+
+        <a href="#" class="btn">
+            View Portfolio
+        </a>
+    </p>
+
+</div>
+
+
+</div>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        <strong>
+            ABERDARE TECHNICAL COLLEGE
+        </strong>
+    </p>
+
+    <p>
+        Building Department | Module 2
+    </p>
+
+    <p>
+        &copy; 2026 Aberdare Technical College
+    </p>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    /* ================= HAMBURGER MENU ================= */
+
+    function toggleMenu() {
+
+        const menu =
+            document.getElementById("navMenu");
+
+        menu.classList.toggle("show");
+
+    }
+
+
+    /* ================= MODULE DATA ================= */
+
+    const students = [
+        "STUDENT 2",
+        "STUDENT 3",
+        "STUDENT 4",
+        "STUDENT 5",
+        "STUDENT 6",
+        "STUDENT 7",
+        "STUDENT 8",
+        "STUDENT 9",
+        "STUDENT 10"
+    ];
+
+
+    const units = [
+
+        "Perform Building Site Preliminary Works 1",
+
+        "Perform Building Temporary Works"
+
+    ];
+
+
+    /* ================= GENERATE STUDENTS ================= */
+
+    const table =
+        document.getElementById("assessmentTable");
+
+
+    students.forEach(function(student) {
+
+        units.forEach(function(unit, index) {
+
+            const row =
+                document.createElement("tr");
+
+
+            if (index === 0) {
+
+                const studentCell =
+                    document.createElement("td");
+
+                studentCell.rowSpan = 2;
+
+                studentCell.className =
+                    "student-name";
+
+                studentCell.textContent =
+                    student;
+
+                row.appendChild(studentCell);
+
+            }
+
+
+            const unitCell =
+                document.createElement("td");
+
+            unitCell.className =
+                "unit-name";
+
+            unitCell.textContent =
+                unit;
+
+            row.appendChild(unitCell);
+
+
+            /* Practical 1 */
+
+            row.innerHTML += `
+                <td>-</td>
+                <td>-</td>
+
+                <td>
+                    <a href="#" class="btn">
+                        View
+                    </a>
+                </td>
+
+                <!-- Practical 2 -->
+
+                <td>-</td>
+                <td>-</td>
+
+                <td>
+                    <a href="#" class="btn">
+                        View
+                    </a>
+                </td>
+
+                <!-- Practical 3 -->
+
+                <td>-</td>
+                <td>-</td>
+
+                <td>
+                    <a href="#" class="btn">
+                        View
+                    </a>
+                </td>
+
+                <!-- Averages -->
+
+                <td>-</td>
+                <td>-</td>
+            `;
+
+
+            table.appendChild(row);
+
+        });
+
+    });
+
+
+    /* ================= CLOSE MENU ================= */
+
+    document
+        .querySelectorAll(".nav-menu a")
+        .forEach(function(link) {
+
+            link.addEventListener("click", function() {
+
+                document
+                    .getElementById("navMenu")
+                    .classList.remove("show");
+
+            });
+
+        });
+
+
+    /* ================= CLICK OUTSIDE ================= */
+
+    document.addEventListener("click", function(event) {
+
+        const navbar =
+            document.querySelector(".navbar");
+
+        const menu =
+            document.getElementById("navMenu");
+
+
+        if (!navbar.contains(event.target)) {
+
+            menu.classList.remove("show");
+
+        }
+
+    });
+
+</script>
+
+
+</body>
+
+</html>
+```

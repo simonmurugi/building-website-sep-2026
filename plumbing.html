@@ -1,0 +1,2501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Module 1 </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            color: #222;
+        }
+
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: #800000;
+            color: white;
+            text-align: center;
+            padding: 25px 20px 18px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 30px;
+        }
+
+        header h2 {
+            margin: 8px 0;
+            font-size: 22px;
+        }
+
+        header p {
+            margin: 5px 0;
+        }
+
+
+        /* ================= HAMBURGER NAVIGATION ================= */
+
+        .navbar {
+            background: #4d0000;
+            height: 65px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 25px;
+
+            position: sticky;
+            top: 0;
+
+            z-index: 9999;
+
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-title {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .hamburger {
+            width: 45px;
+            height: 42px;
+
+            border: none;
+            border-radius: 5px;
+
+            background: #800000;
+
+            cursor: pointer;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 27px;
+            height: 3px;
+
+            background: white;
+
+            border-radius: 3px;
+        }
+
+        .hamburger:hover {
+            background: #a00000;
+        }
+
+
+        /* ================= MENU ================= */
+
+        .nav-menu {
+            position: absolute;
+
+            right: 20px;
+            top: 65px;
+
+            width: 270px;
+
+            background: #4d0000;
+
+            display: none;
+            flex-direction: column;
+
+            border-radius: 0 0 8px 8px;
+
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
+
+            overflow: hidden;
+        }
+
+        .nav-menu.show {
+            display: flex;
+        }
+
+        .nav-menu a {
+            color: white;
+
+            text-decoration: none;
+
+            padding: 15px 20px;
+
+            border-bottom: 1px solid #6d1a1a;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .nav-menu a:hover {
+            background: #800000;
+            padding-left: 28px;
+        }
+
+        .nav-menu a.active {
+            background: #800000;
+        }
+
+
+        /* ================= QUICK BUTTONS ================= */
+
+        .nav-btn-container {
+            width: 100%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+
+            padding: 15px;
+
+            background: #660000;
+        }
+
+        .nav-btn {
+            background: #800000;
+
+            color: white;
+
+            padding: 11px 18px;
+
+            text-decoration: none;
+
+            border-radius: 5px;
+
+            font-weight: bold;
+
+            border: 1px solid #aa4444;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #a00000;
+
+            transform: translateY(-2px);
+
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+        }
+
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            width: 95%;
+            margin: auto;
+            padding: 20px;
+        }
+
+
+        h2 {
+            color: #800000;
+
+            margin-top: 30px;
+
+            border-left: 6px solid #800000;
+
+            padding-left: 10px;
+        }
+
+
+        /* ================= INFORMATION CARD ================= */
+
+        .info-card {
+            background: white;
+
+            padding: 20px;
+
+            margin: 20px 0;
+
+            border-radius: 8px;
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        .info-card h3 {
+            color: #800000;
+
+            margin-top: 0;
+        }
+
+        .info-card li {
+            margin: 8px 0;
+        }
+
+
+        /* ================= TABLE ================= */
+
+        .table-wrapper {
+            width: 100%;
+
+            overflow-x: auto;
+
+            background: white;
+
+            border-radius: 8px;
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+
+            min-width: 1250px;
+
+            border-collapse: collapse;
+
+            background: white;
+        }
+
+        th,
+        td {
+            border: 1px solid #ddd;
+
+            padding: 10px;
+
+            text-align: center;
+        }
+
+        th {
+            background: #800000;
+
+            color: white;
+
+            font-size: 13px;
+        }
+
+        tr:nth-child(even) td {
+            background: #fafafa;
+        }
+
+        .student-name {
+            background: #f1dada !important;
+
+            color: #4d0000;
+
+            font-weight: bold;
+        }
+
+        .unit-name {
+            background: #f7e6e6 !important;
+
+            color: #4d0000;
+
+            font-weight: bold;
+
+            text-align: left;
+
+            min-width: 300px;
+        }
+
+
+        /* ================= BUTTON ================= */
+
+        .btn {
+            display: inline-block;
+
+            background: #800000;
+
+            color: white;
+
+            padding: 6px 10px;
+
+            text-decoration: none;
+
+            border-radius: 4px;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #a00000;
+        }
+
+
+        /* ================= CARD ================= */
+
+        .card {
+            background: white;
+
+            padding: 20px;
+
+            margin: 20px 0;
+
+            border-radius: 8px;
+
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+        }
+
+        .card h3 {
+            color: #800000;
+
+            border-bottom: 2px solid #eee;
+
+            padding-bottom: 8px;
+
+            margin-top: 0;
+        }
+
+        .card h4 {
+            color: #660000;
+
+            margin-top: 25px;
+        }
+
+
+        /* ================= ASSESSMENT ITEM ================= */
+
+        .assessment-item {
+            background: #f9eeee;
+
+            border-left: 5px solid #800000;
+
+            padding: 12px;
+
+            margin: 8px 0;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            flex-wrap: wrap;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            background: #4d0000;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px;
+
+            margin-top: 30px;
+        }
+
+        footer p {
+            margin: 5px;
+        }
+
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 700px) {
+
+            header h1 {
+                font-size: 23px;
+            }
+
+            header h2 {
+                font-size: 18px;
+            }
+
+            .navbar {
+                padding: 0 15px;
+            }
+
+            .nav-title {
+                font-size: 14px;
+            }
+
+            .nav-menu {
+                right: 10px;
+                width: 240px;
+            }
+
+            .container {
+                width: 100%;
+                padding: 10px;
+            }
+
+            .nav-btn {
+                width: 100%;
+                text-align: center;
+            }
+
+            .assessment-item {
+                display: block;
+            }
+
+            .assessment-item .btn {
+                margin-top: 8px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+    <h1>
+        ABERDARE TECHNICAL COLLEGE
+    </h1>
+
+    <h2>
+        PLUMBING DEPARTMENT
+    </h2>
+
+    <p>
+        MODULE 1 - TRAINING AND ASSESSMENT
+    </p>
+
+</header>
+
+
+
+<!-- ================= HAMBURGER NAVIGATION ================= -->
+
+<nav class="navbar">
+
+    <div class="nav-title">
+        PLUMBING DEPARTMENT
+    </div>
+
+
+    <button
+        class="hamburger"
+        onclick="toggleMenu()"
+        aria-label="Open Navigation Menu">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
+
+
+    <div
+        class="nav-menu"
+        id="navMenu">
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="plumbing.html">
+            Module 1
+        </a>
+
+        <a
+            href="module2plumbing.html"
+            class="active">
+
+            Module 2
+
+        </a>
+
+        <a href="module3plumbing.html">
+            Module 3
+        </a>
+
+        <a href="module4plumbing.html">
+            Module 4
+        </a>
+
+        <a href="module5plumbing.html">
+            Module 5
+        </a>
+
+        <a href="module6plumbing.html">
+            Module 6
+        </a>
+
+        <a href="about.html">
+            About Us
+        </a>
+
+        <a href="reports.html">
+            Student Reports
+        </a>
+
+        <a href="contact.html">
+            Contacts
+        </a>
+
+    </div>
+
+</nav>
+
+
+
+<!-- ================= QUICK ACCESS BUTTONS ================= -->
+
+<div class="nav-btn-container">
+
+    <a
+        href="timetable.pdf"
+        class="nav-btn">
+
+        Timetable
+
+    </a>
+
+
+    <a
+        href="cu.pdf"
+        class="nav-btn">
+
+        Curriculum
+
+    </a>
+
+
+    <a
+        href="attendance.pdf"
+        class="nav-btn">
+
+        Attendance
+
+    </a>
+
+
+    <a
+        href="os.pdf"
+        class="nav-btn">
+
+        Occupational Standards
+
+    </a>
+
+
+    <a
+        href="reports.html"
+        class="nav-btn">
+
+        Student Reports
+
+    </a>
+  <a
+        href=""
+        class="nav-btn">
+
+        Sanitary application 1 learning plan
+
+    </a>
+  <a
+        href=""
+        class="nav-btn">
+
+        Water supply system 1 Learning plan
+
+    </a>
+  <a
+        href=""
+        class="nav-btn">
+
+        Drainage system 1 Learning plan
+
+    </a>
+</div>
+
+
+
+<div class="container">
+
+
+<!-- ================= MODULE INFORMATION ================= -->
+
+<div class="info-card">
+
+    <h3>
+        Module 1 - Plumbing Department
+    </h3>
+
+    <p>
+        This page provides the practical assessment records,
+        examination links, trainer e-portfolio and observation
+        checklists for learners undertaking Module 1 in the
+        Plumbing Department.
+    </p>
+
+
+    <p>
+        <strong>
+            Units covered in Module 1:
+        </strong>
+    </p>
+
+
+    <ul>
+
+        <li>
+            Sanitary Application 1
+        </li>
+
+        <li>
+            Water Supply System 1
+        </li>
+
+        <li>
+            Drainage System 1
+        </li>
+
+    </ul>
+
+</div>
+
+
+
+<!-- ================= PRACTICAL ASSESSMENT ================= -->
+
+<h2>
+    Practical Assessment Scores
+</h2>
+
+
+<div class="table-wrapper">
+
+<table>
+
+    <thead>
+
+        <tr>
+
+            <th rowspan="2">
+                Student
+            </th>
+
+            <th rowspan="2">
+                Unit
+            </th>
+
+
+            <th colspan="2">
+                Practical 1
+            </th>
+
+            <th rowspan="2">
+                View Exam
+            </th>
+
+
+            <th colspan="2">
+                Practical 2
+            </th>
+
+            <th rowspan="2">
+                View Exam
+            </th>
+
+
+            <th colspan="2">
+                Practical 3
+            </th>
+
+            <th rowspan="2">
+                View Exam
+            </th>
+
+
+            <th rowspan="2">
+                FA Practical<br>
+                Average
+            </th>
+
+            <th rowspan="2">
+                FA Oral<br>
+                Average
+            </th>
+
+        </tr>
+
+
+        <tr>
+
+            <th>
+                Prac
+            </th>
+
+            <th>
+                Oral
+            </th>
+
+            <th>
+                Prac
+            </th>
+
+            <th>
+                Oral
+            </th>
+
+            <th>
+                Prac
+            </th>
+
+            <th>
+                Oral
+            </th>
+
+        </tr>
+
+    </thead>
+
+
+    <tbody>
+
+
+        <!-- ================= STUDENT 1 ================= -->
+
+        <tr>
+
+            <td
+                rowspan="3"
+                class="student-name">
+
+                STUDENT 1
+
+            </td>
+
+
+            <td class="unit-name">
+
+                Sanitary Application 1
+
+            </td>
+
+
+            <td>00</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+
+        <tr>
+
+            <td class="unit-name">
+
+                Water Supply System 1
+
+            </td>
+
+
+            <td>59</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+
+        <tr>
+
+            <td class="unit-name">
+
+                Drainage System 1
+
+            </td>
+
+
+            <td>59</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+
+        <!-- ================= STUDENT 2 ================= -->
+
+        <tr>
+
+            <td
+                rowspan="3"
+                class="student-name">
+
+                STUDENT 2
+
+            </td>
+
+
+            <td class="unit-name">
+
+                Sanitary Application 1
+
+            </td>
+
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+
+        <tr>
+
+            <td class="unit-name">
+
+                Water Supply System 1
+
+            </td>
+
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+
+        <tr>
+
+            <td class="unit-name">
+
+                Drainage System 1
+
+            </td>
+
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">
+                    View
+                </a>
+            </td>
+
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+
+        <!-- ================= STUDENT 3 ================= -->
+
+        <tr>
+
+            <td rowspan="3" class="student-name">
+                STUDENT 3
+            </td>
+
+            <td class="unit-name">
+                Sanitary Application 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="unit-name">
+                Water Supply System 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="unit-name">
+                Drainage System 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+
+        <!-- ================= STUDENT 4 ================= -->
+
+        <tr>
+
+            <td rowspan="3" class="student-name">
+                STUDENT 4
+            </td>
+
+            <td class="unit-name">
+                Sanitary Application 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="unit-name">
+                Water Supply System 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="unit-name">
+                Drainage System 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+
+        <!-- ================= STUDENT 5 ================= -->
+
+        <tr>
+
+            <td rowspan="3" class="student-name">
+                STUDENT 5
+            </td>
+
+            <td class="unit-name">
+                Sanitary Application 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="unit-name">
+                Water Supply System 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="unit-name">
+                Drainage System 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+
+        <!-- ================= STUDENT 6 ================= -->
+
+        <tr>
+
+            <td rowspan="3" class="student-name">
+                STUDENT 6
+            </td>
+
+            <td class="unit-name">
+                Sanitary Application 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="unit-name">
+                Water Supply System 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="unit-name">
+                Drainage System 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+
+        <!-- ================= STUDENT 7 ================= -->
+
+        <tr>
+
+            <td rowspan="3" class="student-name">
+                STUDENT 7
+            </td>
+
+            <td class="unit-name">
+                Sanitary Application 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="unit-name">
+                Water Supply System 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="unit-name">
+                Drainage System 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+
+        <!-- ================= STUDENT 8 ================= -->
+
+        <tr>
+
+            <td rowspan="3" class="student-name">
+                STUDENT 8
+            </td>
+
+            <td class="unit-name">
+                Sanitary Application 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="unit-name">
+                Water Supply System 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="unit-name">
+                Drainage System 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+
+        <!-- ================= STUDENT 9 ================= -->
+
+        <tr>
+
+            <td rowspan="3" class="student-name">
+                STUDENT 9
+            </td>
+
+            <td class="unit-name">
+                Sanitary Application 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="unit-name">
+                Water Supply System 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="unit-name">
+                Drainage System 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+
+        <!-- ================= STUDENT 10 ================= -->
+
+        <tr>
+
+            <td rowspan="3" class="student-name">
+                STUDENT 10
+            </td>
+
+            <td class="unit-name">
+                Sanitary Application 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="unit-name">
+                Water Supply System 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+
+        <tr>
+
+            <td class="unit-name">
+                Drainage System 1
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+            <td>
+                <a href="#" class="btn">View</a>
+            </td>
+
+            <td>-</td>
+            <td>-</td>
+
+        </tr>
+
+    </tbody>
+
+</table>
+
+</div>
+
+
+
+<!-- ================= TRAINER E-PORTFOLIO ================= -->
+
+<div class="card">
+
+    <h3>
+        TRAINER'S e-PORTFOLIO
+    </h3>
+
+
+    <!-- ================= SANITARY APPLICATION ================= -->
+
+    <h4>
+        Sanitary Application 1
+    </h4>
+
+
+    <div class="assessment-item">
+
+        <span>
+            Practical 1
+        </span>
+
+        <a
+            href="sanitary_application_practical1.pdf"
+            class="btn">
+
+            View Practical 1
+
+        </a>
+
+    </div>
+
+
+    <div class="assessment-item">
+
+        <span>
+            Practical 2
+        </span>
+
+        <a
+            href="sanitary_application_practical2.pdf"
+            class="btn">
+
+            View Practical 2
+
+        </a>
+
+    </div>
+
+
+    <div class="assessment-item">
+
+        <span>
+            Practical 3
+        </span>
+
+        <a
+            href="sanitary_application_practical3.pdf"
+            class="btn">
+
+            View Practical 3
+
+        </a>
+
+    </div>
+
+
+
+    <!-- ================= WATER SUPPLY ================= -->
+
+    <h4>
+        Water Supply System 1
+    </h4>
+
+
+    <div class="assessment-item">
+
+        <span>
+            Practical 1
+        </span>
+
+        <a
+            href="water_supply_practical1.pdf"
+            class="btn">
+
+            View Practical 1
+
+        </a>
+
+    </div>
+
+
+    <div class="assessment-item">
+
+        <span>
+            Practical 2
+        </span>
+
+        <a
+            href="water_supply_practical2.pdf"
+            class="btn">
+
+            View Practical 2
+
+        </a>
+
+    </div>
+
+
+    <div class="assessment-item">
+
+        <span>
+            Practical 3
+        </span>
+
+        <a
+            href="water_supply_practical3.pdf"
+            class="btn">
+
+            View Practical 3
+
+        </a>
+
+    </div>
+
+
+
+    <!-- ================= DRAINAGE ================= -->
+
+    <h4>
+        Drainage System 1
+    </h4>
+
+
+    <div class="assessment-item">
+
+        <span>
+            Practical 1
+        </span>
+
+        <a
+            href="drainage_practical1.pdf"
+            class="btn">
+
+            View Practical 1
+
+        </a>
+
+    </div>
+
+
+    <div class="assessment-item">
+
+        <span>
+            Practical 2
+        </span>
+
+        <a
+            href="drainage_practical2.pdf"
+            class="btn">
+
+            View Practical 2
+
+        </a>
+
+    </div>
+
+
+    <div class="assessment-item">
+
+        <span>
+            Practical 3
+        </span>
+
+        <a
+            href="drainage_practical3.pdf"
+            class="btn">
+
+            View Practical 3
+
+        </a>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================= OBSERVATION CHECKLIST ================= -->
+
+<div class="card">
+
+    <h3>
+        CONTINUOUS PRACTICAL OBSERVATION CHECKLIST
+    </h3>
+
+
+    <!-- SANITARY -->
+
+    <h4>
+        Sanitary Application 1
+    </h4>
+
+
+    <p>
+        Practical 1 Checklist
+
+        <a
+            href="sanitary_checklist1.pdf"
+            class="btn">
+
+            View Checklist
+
+        </a>
+    </p>
+
+
+    <p>
+        Practical 2 Checklist
+
+        <a
+            href="sanitary_checklist2.pdf"
+            class="btn">
+
+            View Checklist
+
+        </a>
+    </p>
+
+
+    <p>
+        Practical 3 Checklist
+
+        <a
+            href="sanitary_checklist3.pdf"
+            class="btn">
+
+            View Checklist
+
+        </a>
+    </p>
+
+
+
+    <!-- WATER SUPPLY -->
+
+    <h4>
+        Water Supply System 1
+    </h4>
+
+
+    <p>
+        Practical 1 Checklist
+
+        <a
+            href="water_supply_checklist1.pdf"
+            class="btn">
+
+            View Checklist
+
+        </a>
+    </p>
+
+
+    <p>
+        Practical 2 Checklist
+
+        <a
+            href="water_supply_checklist2.pdf"
+            class="btn">
+
+            View Checklist
+
+        </a>
+    </p>
+
+
+    <p>
+        Practical 3 Checklist
+
+        <a
+            href="water_supply_checklist3.pdf"
+            class="btn">
+
+            View Checklist
+
+        </a>
+    </p>
+
+
+
+    <!-- DRAINAGE -->
+
+    <h4>
+        Drainage System 1
+    </h4>
+
+
+    <p>
+        Practical 1 Checklist
+
+        <a
+            href="drainage_checklist1.pdf"
+            class="btn">
+
+            View Checklist
+
+        </a>
+    </p>
+
+
+    <p>
+        Practical 2 Checklist
+
+        <a
+            href="drainage_checklist2.pdf"
+            class="btn">
+
+            View Checklist
+
+        </a>
+    </p>
+
+
+    <p>
+        Practical 3 Checklist
+
+        <a
+            href="drainage_checklist3.pdf"
+            class="btn">
+
+            View Checklist
+
+        </a>
+    </p>
+
+</div>
+
+
+
+<!-- ================= STUDENT PORTFOLIO ================= -->
+
+<div class="card">
+
+    <h3>
+        STUDENT PORTFOLIO
+    </h3>
+
+    <p>
+        Student practical work, evidence, photographs and
+        completed assessment records can be accessed below.
+    </p>
+
+
+    <p>
+        <strong>Student 1</strong>
+
+        <a
+            href="#"
+            class="btn">
+
+            View Portfolio
+
+        </a>
+    </p>
+
+
+    <p>
+        <strong>Student 2</strong>
+
+        <a
+            href="#"
+            class="btn">
+
+            View Portfolio
+
+        </a>
+    </p>
+
+
+    <p>
+        <strong>Student 3</strong>
+
+        <a
+            href="#"
+            class="btn">
+
+            View Portfolio
+
+        </a>
+    </p>
+
+
+    <p>
+        <strong>Student 4</strong>
+
+        <a
+            href="#"
+            class="btn">
+
+            View Portfolio
+
+        </a>
+    </p>
+
+
+    <p>
+        <strong>Student 5</strong>
+
+        <a
+            href="#"
+            class="btn">
+
+            View Portfolio
+
+        </a>
+    </p>
+
+
+    <p>
+        <strong>Student 6</strong>
+
+        <a
+            href="#"
+            class="btn">
+
+            View Portfolio
+
+        </a>
+    </p>
+
+
+    <p>
+        <strong>Student 7</strong>
+
+        <a
+            href="#"
+            class="btn">
+
+            View Portfolio
+
+        </a>
+    </p>
+
+
+    <p>
+        <strong>Student 8</strong>
+
+        <a
+            href="#"
+            class="btn">
+
+            View Portfolio
+
+        </a>
+    </p>
+
+
+    <p>
+        <strong>Student 9</strong>
+
+        <a
+            href="#"
+            class="btn">
+
+            View Portfolio
+
+        </a>
+    </p>
+
+
+    <p>
+        <strong>Student 10</strong>
+
+        <a
+            href="#"
+            class="btn">
+
+            View Portfolio
+
+        </a>
+    </p>
+
+</div>
+
+
+</div>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        <strong>
+            ABERDARE TECHNICAL COLLEGE
+        </strong>
+    </p>
+
+    <p>
+        Plumbing Department | Module 2
+    </p>
+
+    <p>
+        &copy; 2026 Aberdare Technical College
+    </p>
+
+</footer>
+
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    function toggleMenu() {
+
+        const menu =
+            document.getElementById("navMenu");
+
+        menu.classList.toggle("show");
+
+    }
+
+
+    /* Close menu after selecting a page */
+
+    document
+        .querySelectorAll(".nav-menu a")
+        .forEach(function(link) {
+
+            link.addEventListener("click", function() {
+
+                document
+                    .getElementById("navMenu")
+                    .classList
+                    .remove("show");
+
+            });
+
+        });
+
+
+    /* Close menu when clicking outside */
+
+    document.addEventListener("click", function(event) {
+
+        const navbar =
+            document.querySelector(".navbar");
+
+        const menu =
+            document.getElementById("navMenu");
+
+
+        if (!navbar.contains(event.target)) {
+
+            menu.classList.remove("show");
+
+        }
+
+    });
+
+</script>
+
+
+</body>
+
+</html>
